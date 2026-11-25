@@ -1,0 +1,229 @@
+{
+  "$schema_note": "Theme reference ของระบบ Quiz Show (index.html) ใช้เป็น ref สำหรับสร้างระบบถัดไปให้หน้าตาและความรู้สึกเหมือนกัน",
+  "name": "Quiz Show Minimal Pantone",
+  "version": "1.0.0",
+  "created": "2026-11-25",
+  "style": {
+    "concept": "Minimal, พื้นเรียบ, เส้นบาง, ใช้สี Pantone เป็นสีความหมาย (primary / highlight / ถูก / ผิด) ไม่ใช้ gradient หรือเงาหนัก",
+    "principles": [
+      "ใช้พื้นที่เต็มจอ (full viewport) และ responsive ทุกหน้า",
+      "หน่วยทุกอย่างเป็น rem เพื่อให้ปุ่มปรับขนาดฟอนต์ (--scale) มีผลทั้งระบบ",
+      "สีทุกสีอ้างผ่าน CSS variables เพื่อสลับ light/dark ได้ทันที",
+      "จุดเด่นมีจุดเดียวต่อหน้า (เช่น กระดานสุ่มหมายเลข) ที่เหลือเรียบ",
+      "Motion ใช้เมื่อตอบสนองการกระทำของผู้ใช้เท่านั้น และเคารพ prefers-reduced-motion"
+    ]
+  },
+
+  "pantone_reference": {
+    "classic_blue":  { "code": "19-4052", "hex": "#0F4C81", "role": "primary (ปุ่มหลัก, ช่องที่ถูกเลือก)" },
+    "peach_fuzz":    { "code": "13-1023", "hex": "#FFBE98", "role": "highlight (ไฮไลต์ตอนสุ่ม)" },
+    "greenery":      { "code": "15-0343", "hex": "#88B04B", "role": "success (ตอบถูก)" },
+    "viva_magenta":  { "code": "18-1750", "hex": "#BB2649", "role": "danger (ตอบผิด, ปุ่ม End)" },
+    "ultimate_gray": { "code": "17-5104", "hex": "#939597", "role": "muted text (dark mode)" },
+    "cloud_dancer":  { "code": "11-4201", "hex": "#F0EEE9", "role": "background (light mode)" },
+    "very_peri":     { "code": "17-3938", "hex": "#6667AB", "role": "focus ring" }
+  },
+
+  "colors": {
+    "light": {
+      "bg": "#F0EEE9",
+      "surface": "#FFFFFF",
+      "surface-2": "#E7E4DE",
+      "text": "#1A2430",
+      "muted": "#6F7175",
+      "line": "#D9D6CF",
+      "primary": "#0F4C81",
+      "on-primary": "#FFFFFF",
+      "primary-soft": "rgba(15,76,129,.10)",
+      "focus": "#6667AB",
+      "hl": "#FFBE98",
+      "on-hl": "#1A2430",
+      "ok": "#5E8A2E",
+      "ok-soft": "rgba(136,176,75,.18)",
+      "bad": "#BB2649",
+      "bad-soft": "rgba(187,38,73,.10)",
+      "overlay": "rgba(26,36,48,.45)"
+    },
+    "dark": {
+      "bg": "#0E1620",
+      "surface": "#16212D",
+      "surface-2": "#1E2B39",
+      "text": "#ECEAE5",
+      "muted": "#939597",
+      "line": "#2A3949",
+      "primary": "#5D93C8",
+      "on-primary": "#0E1620",
+      "primary-soft": "rgba(93,147,200,.16)",
+      "focus": "#9C9DD6",
+      "hl": "#FFBE98",
+      "on-hl": "#0E1620",
+      "ok": "#88B04B",
+      "ok-soft": "rgba(136,176,75,.16)",
+      "bad": "#E2577A",
+      "bad-soft": "rgba(226,87,122,.14)",
+      "overlay": "rgba(0,0,0,.6)"
+    },
+    "notes": "ok ใน light mode เข้มกว่า Greenery เพื่อให้อ่านบนพื้นขาวได้ (contrast); dark mode ใช้ Greenery แท้"
+  },
+
+  "typography": {
+    "font_family": "\"IBM Plex Sans Thai\", system-ui, -apple-system, \"Segoe UI\", Tahoma, sans-serif",
+    "font_mono": "ui-monospace, \"SF Mono\", Menlo, Consolas, monospace",
+    "google_fonts_url": "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap",
+    "base_size": "calc(16px * var(--scale))",
+    "line_height": 1.55,
+    "weights": { "regular": 400, "medium": 500, "semibold": 600, "bold": 700 },
+    "scale_rem": {
+      "caption": "0.85rem",
+      "small": "0.92rem",
+      "body": "1rem",
+      "choice": "1.45rem",
+      "h1": "1.6rem",
+      "tile_number": "1.6rem",
+      "question": "2rem",
+      "verdict": "2.4rem",
+      "dialog_number": "3.6rem"
+    },
+    "heading": { "weight": 600, "letter_spacing": "-0.01em", "line_height": 1.25 },
+    "numbers": "font-variant-numeric: tabular-nums"
+  },
+
+  "font_size_control": {
+    "css_variable": "--scale",
+    "steps": [0.8, 0.9, 1, 1.1, 1.25, 1.4, 1.6, 1.8],
+    "default_index": 2,
+    "ui": "ปุ่ม A− / ตัวเลข % / A+ ในกลุ่มปุ่มแบบ pill (segmented)",
+    "storage_key": "quizshow_scaleIdx"
+  },
+
+  "theme_toggle": {
+    "attribute": "html[data-theme=\"light\" | \"dark\"]",
+    "default": "ตาม prefers-color-scheme ของเครื่อง",
+    "labels": { "to_dark": "☾ โหมดมืด", "to_light": "☀ โหมดสว่าง" },
+    "storage_key": "quizshow_theme",
+    "transition": "background-color .25s, color .25s"
+  },
+
+  "shape": {
+    "radius": { "card": "14px", "tile": "12px", "checkbox": "6px", "pill": "999px" },
+    "border": { "card": "1px solid var(--line)", "choice": "2px solid var(--line)", "tile": "1.5px solid var(--line)" },
+    "shadow": "ไม่ใช้เงา ยกเว้นช่องที่ถูกเลือก: 0 0 0 .4rem var(--primary-soft)"
+  },
+
+  "spacing": {
+    "page_padding": "max(1rem, env(safe-area-inset-top)) clamp(1rem, 3vw, 2.5rem) max(1rem, env(safe-area-inset-bottom))",
+    "page_gap": "1rem",
+    "row_gap": "0.6rem",
+    "grid_gap": "clamp(.75rem, 2vw, 1.25rem)",
+    "card_padding": "0.85rem 1.1rem",
+    "question_padding": "clamp(1.25rem, 4vw, 3rem)"
+  },
+
+  "layout": {
+    "page": "display:flex; flex-direction:column; min-height:100dvh; แสดงทีละหน้าด้วย class .active",
+    "full_screen_question_page": "height:100dvh; คำถาม flex 1.2, ตัวเลือก flex 1; จอ ≤640px เปลี่ยนเป็น height:auto",
+    "choices_grid": "grid-template-columns: 1fr 1fr; grid-auto-rows: 1fr (มือถือ 1 คอลัมน์)",
+    "tile_board": "grid-template-columns: repeat(auto-fill, minmax(calc(4.6rem * var(--scale)), 1fr)); aspect-ratio:1",
+    "breakpoints": { "mobile": "max-width: 640px" },
+    "viewport_meta": "width=device-width, initial-scale=1, viewport-fit=cover"
+  },
+
+  "components": {
+    "button": {
+      "base": "font-size:1rem; font-weight:500; padding:.55rem 1.15rem; min-height:2.6rem; border-radius:999px; border:1px solid var(--line); background:var(--surface)",
+      "hover": "border-color: var(--text)",
+      "primary": "background & border: var(--primary); color: var(--on-primary); hover: filter brightness(1.12)",
+      "ghost": "background: transparent",
+      "danger": "color & border: var(--bad); background transparent; hover background var(--bad-soft)",
+      "large": "font-size:1.15rem; padding:.8rem 2.2rem; min-height:3.3rem",
+      "disabled": "opacity:.4; cursor:not-allowed",
+      "toggle_off": "[aria-pressed=false] → color var(--muted) + line-through"
+    },
+    "checkbox": {
+      "look": "สี่เหลี่ยมทึบมีเครื่องหมายถูก (ตาม mockup)",
+      "size": "1.45rem",
+      "unchecked": "border 2px solid var(--text); background var(--surface)",
+      "checked": "background var(--text); เครื่องหมายถูกสี var(--surface) ทำจาก ::after หมุน 45°"
+    },
+    "card": "background var(--surface); border 1px solid var(--line); border-radius 14px",
+    "list_item": { "layout": "checkbox | เลขข้อ (muted) | ข้อความ", "disabled_state": "opacity .5", "answer_preview": "✓ สี ok, ✕ สี bad, ตัวเล็ก muted" },
+    "tile": {
+      "default": "surface + line border, ตัวเลขกลาง",
+      "highlight": "background var(--hl); scale(1.07)",
+      "picked": "background var(--primary); color var(--on-primary); scale(1.1); ring var(--primary-soft)",
+      "used": "opacity .25; line-through",
+      "cooldown": "opacity .45; border dashed; ป้าย 'พัก n' มุมล่าง"
+    },
+    "choice_card": {
+      "layout": "flex กึ่งกลาง; checkbox มุมซ้ายบน; ป้าย A/B มุมขวาบน",
+      "selected": "border var(--primary); background var(--primary-soft)",
+      "correct": "border var(--ok); background var(--ok-soft); ไอคอน ✓ SVG มุมขวาล่าง",
+      "wrong": "border var(--bad); background var(--bad-soft); ไอคอน ✕ SVG มุมขวาล่าง",
+      "your_pick_badge": "pill ตัวเล็ก background var(--text) color var(--bg)"
+    },
+    "dialog": {
+      "overlay": "fixed inset 0; background var(--overlay)",
+      "box": "card; max-width 26rem; กึ่งกลาง; ตัวเลขใหญ่ 3.6rem สี primary",
+      "buttons": "ซ้าย = ไม่ (ปกติ), ขวา = ใช่ (primary); Esc / คลิกพื้นหลัง = ไม่",
+      "enter_animation": "pop .18s ease-out (scale .94 → 1, opacity 0 → 1)"
+    },
+    "focus": "outline 2px solid var(--focus); outline-offset 3px (เฉพาะ :focus-visible)"
+  },
+
+  "motion": {
+    "random_spin": {
+      "steps": "22–29 ครั้ง",
+      "delay_formula": "45ms + (i/steps)^3 × 430ms (เร็วแล้วค่อยๆ ช้าลง)",
+      "land_pause": "300ms ก่อนแสดง popup"
+    },
+    "choice_shuffle": {
+      "swaps": "7–9 ครั้ง",
+      "delay_formula": "110ms + k² × 10ms",
+      "effect": "flip .16s (scaleY .4, opacity .2 ที่ครึ่งทาง)"
+    },
+    "reduced_motion": "ปิด transition/animation ทั้งหมด, สุ่มทันทีไม่มี animation"
+  },
+
+  "sound": {
+    "engine": "Web Audio API สังเคราะห์เสียงในโค้ด (ไม่มีไฟล์เสียงภายนอก)",
+    "mix": { "master": 0.9, "music_bus": 0.3, "sfx_bus": 0.7, "compressor": "DynamicsCompressor ก่อนออกลำโพง" },
+    "background_music": {
+      "bpm": 128,
+      "grid": "16 steps/bar (16th notes)",
+      "progression": ["Am", "F", "C", "G"],
+      "parts": {
+        "kick": "sine 150→45Hz ทุก 4 step",
+        "clap": "noise bandpass 1800Hz ที่ step 4, 12",
+        "hihat": "noise highpass 8000Hz step คี่",
+        "bass": "sawtooth lowpass 520Hz step [0,3,6,8,10,11,14]",
+        "arp": "square lowpass 2600Hz pattern [0,1,2,3,2,1,2,3,0,1,2,3,2,1,0,2]",
+        "buildup": "snare roll ครึ่งหลังของทุกบาร์ที่ 4"
+      },
+      "ducking": { "while_spinning": 0.35, "on_result": 0.2, "restore_after_ms": 1700 }
+    },
+    "sfx": {
+      "tick": "square 700→1500Hz ตามความคืบหน้าการสุ่ม, 50ms",
+      "land": "triangle 988Hz แล้ว 1319Hz (ding)",
+      "swap": "noise sweep 500→3200Hz + blip triangle",
+      "select": "triangle 660Hz, 80ms",
+      "correct": "arpeggio C5-E5-G5-C6 แล้ว chord ค้าง 1.1s + sparkle noise",
+      "wrong": "sawtooth 233→185Hz แล้ว 165→98Hz (buzzer สองจังหวะ)"
+    },
+    "controls": "หน้าตั้งค่า: ♪ เพลง / เสียงเอฟเฟกต์; หน้าเกม: ปุ่ม ♪ มุมขวาบน",
+    "autoplay_rule": "เริ่มเพลงหลังผู้ใช้คลิก (เช่นปุ่มเริ่มเกม) เท่านั้น",
+    "storage_keys": ["quizshow_musicOn", "quizshow_sfxOn"]
+  },
+
+  "copy_tone": {
+    "language": "ไทย ประโยคสั้น ภาษาพูดสุภาพ",
+    "confirm_buttons": "บอกผลของการกด เช่น 'ใช่ ใช้ข้อนี้' / 'ไม่ สุ่มใหม่', 'ใช่ จบเกม' / 'ไม่ เล่นต่อ'",
+    "errors": "บอกว่าผิดตรงไหนและแก้อย่างไร ไม่ขอโทษ"
+  },
+
+  "storage": {
+    "prefix": "quizshow_",
+    "rule": "ครอบ localStorage ด้วย try/catch เสมอ (Google Sites iframe อาจใช้ไม่ได้)"
+  },
+
+  "css_variables": ":root{--scale:1;--bg:#F0EEE9;--surface:#FFFFFF;--surface-2:#E7E4DE;--text:#1A2430;--muted:#6F7175;--line:#D9D6CF;--primary:#0F4C81;--on-primary:#FFFFFF;--primary-soft:rgba(15,76,129,.10);--focus:#6667AB;--hl:#FFBE98;--on-hl:#1A2430;--ok:#5E8A2E;--ok-soft:rgba(136,176,75,.18);--bad:#BB2649;--bad-soft:rgba(187,38,73,.10);--overlay:rgba(26,36,48,.45);color-scheme:light}:root[data-theme=\"dark\"]{--bg:#0E1620;--surface:#16212D;--surface-2:#1E2B39;--text:#ECEAE5;--muted:#939597;--line:#2A3949;--primary:#5D93C8;--on-primary:#0E1620;--primary-soft:rgba(93,147,200,.16);--focus:#9C9DD6;--hl:#FFBE98;--on-hl:#0E1620;--ok:#88B04B;--ok-soft:rgba(136,176,75,.16);--bad:#E2577A;--bad-soft:rgba(226,87,122,.14);--overlay:rgba(0,0,0,.6);color-scheme:dark}html{font-size:calc(16px * var(--scale))}body{font-family:\"IBM Plex Sans Thai\",system-ui,-apple-system,\"Segoe UI\",Tahoma,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}"
+}
